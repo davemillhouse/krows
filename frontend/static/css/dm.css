@@ -1,0 +1,19 @@
+.textInCircle {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 12px;
+    text-align: center;
+    margin-right:10px;
+  }
+
+  .selected-day {
+    color: white;
+    background: green;
+  }
+
+  .unselected-day {
+    color: white;
+    background: red;
+  }
