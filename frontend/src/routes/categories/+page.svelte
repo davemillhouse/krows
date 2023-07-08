@@ -63,7 +63,7 @@
 									{#each categories as category}
 										<tr>
 											<td>{category.name}!</td>
-											<td><button type="button" class="btn mb-3 btn-warning"><i class="ti-heart f_s_14 me-2"></i>Warning</button></td>
+											<td>{category.description}</td>
 										</tr>
 									{/each}
 								</tbody>
@@ -97,7 +97,7 @@
 									class="f-w-400"
 									style="background-color: {category.backgroundColor};color: {category.textColor}"
 								>
-								<button type="button" class="btn mb-3 btn-warning">Product <i class="ml-1 bi-x"></i></button>
+								{category.description}
 								</p>
 							</div>
 						</div>

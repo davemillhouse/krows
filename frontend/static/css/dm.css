@@ -17,3 +17,9 @@
     color: white;
     background: red;
   }
+
+  .generic-circle{
+  font-size: 10pt;
+  margin-right: 10px;
+  color:green;
+}

@@ -1,5 +1,6 @@
-
-
+<script>
+	import { enhance } from '$app/forms';
+    </script>
 
 <nav class="sidebar dark_sidebar">
     <div class="logo d-flex justify-content-between">
@@ -23,12 +24,12 @@
         </a>
     </li>
         <li>
-            <a href="/bookings" aria-expanded="false">
+            <a href="/orders" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="/img/menu-icon/12.svg" alt>
                 </div>
                 <div class="nav_title">
-                    <span>Bookings</span>
+                    <span>Orders</span>
                 </div>
             </a>
         </li>
@@ -51,7 +52,7 @@
                     <span>Reports</span>
                 </div>
             </a>
-            <ul>
+            <ul style="display:none;">
               <li><a href="login.html">Bookings</a></li>
               <li><a href="resister.html">Attendees</a></li>
               <li><a href="error_400.html">Customers</a></li>
@@ -69,11 +70,21 @@
                 </div>
             </a>
             <ul>
-                <li><a href="/categories">Categories</a></li>
+              <li><a href="/categories">Categories</a></li>
               <li><a href="/products">Products</a></li>
-              <li><a href="/suppliers">Suppliers</a></li>
+              <li><a href="/merchandise">Merchandise</a></li>
               <li><a href="/schedules">Schedules</a></li>
           </ul>
+        </li>
+        <li>
+            <a href="/admin" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="/img/menu-icon/18.svg" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Admin</span>
+                </div>
+            </a>
         </li>
     </ul>
 </nav>
@@ -88,13 +99,14 @@
                         <i class="ti-menu"></i>
                     </div>
                     <div class="line_icon open_miniSide d-none d-lg-block">
-                        <img src="/img/line_img.png" alt>
+                        <i class="bi bi-list" style="font-size: 2rem !important;
+                        color: #193E44;"/>
                     </div>
                     <div class="serach_field-area d-flex align-items-center">
                         <div class="search_inner">
-                            <form action="#">
+                            <form method="POST" action="/orders?/search" use:enhance>
                                 <div class="search_field">
-                                    <input type="text" placeholder="Search">
+                                    <input name="searchString" type="text" placeholder="Search">
                                 </div>
                                 <button type="submit"> <img src="/img/icon/icon_search.svg" alt> </button>
                             </form>
