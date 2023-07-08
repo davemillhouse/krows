@@ -3,8 +3,6 @@
 	export let data;
 	const { category } = data;
 
-	console.log(category);
-
 	let addButtonText = 'Add a schedule';
 
 	function showAddCategory() {

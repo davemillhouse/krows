@@ -2,16 +2,6 @@
 	
 
 
-	let view = 'schedules';
-	let addButtonText = 'Add a schedule';
-
-	function showAddProduct() {
-		if (view == 'cards') {
-			addButtonText = 'View schedules';
-		} else {
-			addButtonText = 'Add a schedule';
-		}
-	}
 
 
 </script>
@@ -24,13 +14,13 @@
 				<div class="page_title_left">
                     <h3 class="f_s_30 f_w_700 dark_text">Admin</h3>
                     <ol class="breadcrumb page_bradcam mb-0">
-						<li class="breadcrumb-item"><a href="/admin">Providers</a></li>
+						<li class="breadcrumb-item"><a href="/admin">Suppliers</a></li>
                         <li class="breadcrumb-item"><a href="/admin/teardown">Tear down</a></li>
                         <li class="breadcrumb-item"><a href="/admin/spinup">Spin up</a></li>
                         <li class="breadcrumb-item"><a href="/admin/reports">Reports</a></li>
                     </ol>
                 </div>
-				<button class="btn_2" on:click={showAddProduct}>{addButtonText}</button>
+				
 			</div>
 		</div>
 

@@ -104,7 +104,28 @@
 						</div>
 					</a>
 				</div>
-			{/each}
+			
+				{:else}
+				<div class="col-xl-8">
+					<div class="white_card mb_30 card_height_100" style="max-height:460px;">
+						<div class="white_card_header">
+							<div class="row align-items-center justify-content-between flex-wrap">
+								<div class="col-lg-4">
+									<div class="main-title">
+										<h3 class="m-0">No products</h3>
+									</div>
+								</div>
+							
+							</div>
+						</div>
+						<div class="white_card_body" style="height:100%;max-height:378px;">
+							You do not have any products as yet.
+						</div>
+					</div>
+				</div>
+				{/each}
+	
+	
 		{/if}
 
 		{#if view == 'add'}

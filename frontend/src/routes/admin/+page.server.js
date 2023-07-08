@@ -14,3 +14,4 @@ export const load = async () => {
         suppliers: fetchSuppliers(),
     }
 }
+
