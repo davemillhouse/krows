@@ -61,20 +61,27 @@
           </ul>
         </li>
         <li>
+            
             <a href="#" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="/img/menu-icon/18.svg" alt>
                 </div>
-                <div class="nav_title">
-                    <span>Setup</span>
+                <div class="nav_title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              
+                        Setup
+                   
                 </div>
             </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      
             <ul>
               <li><a href="/categories">Categories</a></li>
               <li><a href="/products">Products</a></li>
+              <li><a href="/tickets">Tickets</a></li>
               <li><a href="/merchandise">Merchandise</a></li>
               <li><a href="/schedules">Schedules</a></li>
           </ul>
+          </div>
         </li>
         <li>
             <a href="/admin" aria-expanded="false">

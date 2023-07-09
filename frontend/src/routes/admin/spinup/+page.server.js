@@ -17,8 +17,10 @@ export const actions = {
         const bookings = data.get('bookings');
         const sessions = data.get('sessions');
         const merchandise = data.get('merchandise');
+        const tickets = data.get('tickets');
+        const soldTickets = data.get('soldTickets');
 
-        const payload = JSON.stringify({ products, categories, voucherPayments, cashPayments, stripePayments, orders, bookings, sessions, merchandise });
+        const payload = JSON.stringify({ products, categories, voucherPayments, cashPayments, stripePayments, orders, bookings, sessions, merchandise, tickets, soldTickets });
     
         const res = await fetch(BASE_API_URL + 'spinup', {
             method: 'POST',

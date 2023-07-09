@@ -58,7 +58,7 @@
 								<div class="f_s_14 f_w_400 text_color_11">{order.customer.firstName} {order.customer.lastName}</div>
 								<div class="user_info">{order.customerOrderId}</div>
 							</div>
-							<div class="user_info">£55</div>
+							<div class="user_info">{order.salesAmountString}</div>
 							<div class="user_info"><Time relative timestamp={order.completedDateTimeUtc} /></div>
 						</div>
 					</a>

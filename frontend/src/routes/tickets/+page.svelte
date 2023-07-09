@@ -2,19 +2,19 @@
 	import { enhance } from '$app/forms';
 
 	export let data;
-	const { products } = data;
+	const { tickets } = data;
 
-	let addButtonText = 'Add a product';
+	let addButtonText = 'Add a ticket';
 	let listOrCardsText = 'Cards';
 	let view = 'cards';
 
-	function showAddProduct() {
+	function showAddTicket() {
 		if (view == 'cards') {
 			view = 'add';
-			addButtonText = 'View products';
+			addButtonText = 'View tickets';
 		} else {
 			view = 'cards'
-			addButtonText = 'Add a product';
+			addButtonText = 'Add a ticket';
 		}
 
 		
@@ -36,7 +36,7 @@
 		<div class="col-12">
 			<div class="page_title_box d-flex align-items-center justify-content-between">
 				<div class="page_title_left">
-					<h3 class="f_s_30 f_w_700 dark_text">Your products</h3>
+					<h3 class="f_s_30 f_w_700 dark_text">Your tickets</h3>
 					<ol class="breadcrumb page_bradcam mb-0">
 						<li class="breadcrumb-item active">
 							
@@ -44,7 +44,7 @@
 						</li>
 					</ol>
 				</div>
-				<button class="btn_2" on:click={showAddProduct}>{addButtonText}</button>
+				<button class="btn_2" on:click={showAddTicket}>{addButtonText}</button>
 			</div>
 		</div>
 
@@ -55,7 +55,7 @@
 						<div class="white_card_header">
 							<div class="box_header m-0">
 								<div class="main-title">
-									<h3 class="m-0">Product List</h3>
+									<h3 class="m-0">Ticket List</h3>
 								</div>
 							</div>
 						</div>
@@ -64,10 +64,10 @@
 								<th>Name</th>
 								<th>Description</th>
 								<tbody>
-									{#each products as product}
+									{#each tickets as ticket}
 										<tr>
-											<td>{product.name}</td>
-											<td>{product.description}</td>
+											<td>{ticket.name}</td>
+											<td>{ticket.description}</td>
 										</tr>
 									{/each}
 								</tbody>
@@ -78,27 +78,27 @@
 			</div>
 		{/if}
 		{#if view == 'cards'}
-			{#each products as product}
+			{#each tickets as ticket}
 				<div class="col-lg-4">
-					<a href="products/{product.id}">
+					<a href="tickets/{ticket.id}">
 						<div
 							class="card_box box_shadow position-relative mb_30"
-							style="background-color: {product.backgroundColor};color: {product.textColor}"
+							style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
 						>
 							<div
 								class="white_box_tittle"
-								style="background-color: {product.backgroundColor};color: {product.textColor}"
+								style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
 							>
 								<div class="main-title2">
-									<h4 class="mb-2 text_white">{product.name}</h4>
+									<h4 class="mb-2 text_white">{ticket.name}</h4>
 								</div>
 							</div>
 							<div class="box_body">
 								<p
 									class="f-w-400"
-									style="background-color: {product.backgroundColor};color: {product.textColor}"
+									style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
 								>
-									{product.description}
+									{ticket.description}
 								</p>
 							</div>
 						</div>
@@ -112,14 +112,14 @@
 							<div class="row align-items-center justify-content-between flex-wrap">
 								<div class="col-lg-4">
 									<div class="main-title">
-										<h3 class="m-0">What'a product?</h3>
+										<h3 class="m-0">No tickets</h3>
 									</div>
 								</div>
 							
 							</div>
 						</div>
 						<div class="white_card_body" style="height:100%;max-height:378px;">
-							A product is the heartbeat of the system. It's the thing you sell.
+							You do not have any tickets as yet.
 						</div>
 					</div>
 				</div>
@@ -134,7 +134,7 @@
 					<div class="white_card_header">
 						<div class="box_header m-0">
 							<div class="main-title">
-								<h3 class="m-0">Create a product for sale</h3>
+								<h3 class="m-0">Create a ticket for sale</h3>
 							</div>
 						</div>
 					</div>

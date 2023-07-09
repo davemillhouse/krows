@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	const { session } = data;
-
 	
 
 	var options = {
@@ -10,7 +9,7 @@
 			type: 'radialBar'
 		},
 
-		series: [67],
+		series: [session.capacityTakenPercentage],
 		colors: ['#20E647'],
 		plotOptions: {
 			radialBar: {
@@ -54,7 +53,7 @@
 		stroke: {
 			lineCap: 'round'
 		},
-		labels: ['Capacity']
+		labels: ['Sold']
 	};
 
 	let chart;
@@ -94,9 +93,7 @@
 					</div>
 				</div>
 				<div class="white_card_body">
-					<div class="thumb mb_30">
-						<img src="/img/table.svg" alt="" class="img-fluid" />
-					</div>
+			
 					<div class="common_form">
 						<form action="#">
 							<div class="row">
@@ -173,8 +170,8 @@
 									<img src="/img/icon2/6.svg" alt="" />
 								</div>
 								<div>
-									<h5>3 places booked</h5>
-									<span>10 places remaining</span>
+									<h5>{session.capacityTakenExcludingOngoingBookings} places booked</h5>
+									<span>{session.capacityRemaining} places remaining</span>
 								</div>
 							</div>
 						</div>
@@ -215,7 +212,7 @@
 											<img src="/img/icon2/3.svg" alt="" />
 										</div>
 										<div>
-											<h5>£2,034</h5>
+											<h5>{session.salesAmountString}</h5>
 											<span>Money earnt</span>
 										</div>
 									</div>
@@ -228,7 +225,7 @@
 											<img src="/img/icon2/1.svg" alt="" />
 										</div>
 										<div>
-											<h5>25</h5>
+											<h5>{session.soldTicketCount}</h5>
 											<span>Tickets sold</span>
 										</div>
 									</div>
@@ -241,7 +238,7 @@
 											<img src="/img/icon2/4.svg" alt="" />
 										</div>
 										<div>
-											<h5>£49</h5>
+											<h5>{session.salesAmountAverageString}</h5>
 											<span>Average price</span>
 										</div>
 									</div>
@@ -254,7 +251,7 @@
 											<img src="/img/icon2/2.svg" alt="" />
 										</div>
 										<div>
-											<h5>{session.capacity}</h5>
+											<h5>{session.completeBookingCount}</h5>
 											<span>Bookings</span>
 										</div>
 									</div>
@@ -267,8 +264,21 @@
 											<img src="/img/icon2/3.svg" alt="" />
 										</div>
 										<div>
-											<h5>37</h5>
+											<h5>todo</h5>
 											<span>Attendees</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/1.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.soldMerchandiseCount}</h5>
+											<span>Merch sold</span>
 										</div>
 									</div>
 								</div>
@@ -311,14 +321,18 @@
 				<div class="white_card_body">
 					<div class="row">
 						{#each session.completeBookings as booking}
+						
 						<div class="col-lg-4">
+							<a href="/orders/{booking.orderId}">
 							<div class="single_user_pil d-flex align-items-center justify-content-between">
 								<div class="user_pils_thumb d-flex align-items-center">
 									<span class="f_s_14 f_w_400 text_color_11">{booking.customerName}</span>
 								</div>
 								<div class="user_info">{booking.customerOrderId}</div>
 							</div>
+						</a>
 						</div>
+				
 						{/each}
 					</div>
 				</div>

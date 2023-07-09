@@ -45,30 +45,20 @@
 					<div class="table-responsive shopping-cart">
 						<table class="table mb-0">
 							<tbody>
+								{#each booking.soldTickets as soldTicket}
 								<tr>
 									<td>
 										<img src="img/products/img-5.png" alt="" height="52" />
 										<p
 											class="d-inline-block align-middle mb-0 product-name f_s_16 f_w_600 color_theme2"
 										>
-											Adult ticket
+										{soldTicket.name}
 										</p>
 									</td>
-									<td>2</td>
-									<td>£198</td>
+									<td>{soldTicket.quantity}</td>
+									<td>{soldTicket.salesAmountString}</td>
 								</tr>
-								<tr>
-									<td>
-										<img src="img/products/01.png" alt="" height="52" />
-										<p
-											class="d-inline-block align-middle mb-0 product-name f_s_16 f_w_600 color_theme2"
-										>
-											Child ticket
-										</p>
-									</td>
-									<td>2</td>
-									<td>£150</td>
-								</tr>
+								{/each}
 								{#each booking.soldMerchandise as soldMerchandise}
 								<tr>
 									<td>
