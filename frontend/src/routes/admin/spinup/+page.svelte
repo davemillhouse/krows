@@ -48,7 +48,7 @@
 								class="form-control"
 								name="products"
 								id="inputNumber"
-								value="4"
+								value="10"
 							/>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 								class="form-control"
 								name="tickets"
 								id="inputNumber"
-								value="10"
+								value="5"
 							/>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 								class="form-control"
 								name="sessions"
 								id="inputNumber"
-								value="1000"
+								value="3000"
 							/>
 						</div>
 					</div>
@@ -85,6 +85,18 @@
 								name="merchandise"
 								id="merchandise"
 								value="10"
+							/>
+						</div>
+					</div>
+					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Vouchers</h6>
+						<div class=" mb-0">
+							<input
+								type="number"
+								class="form-control"
+								name="vouchers"
+								id="vouchers"
+								value="8"
 							/>
 						</div>
 					</div>
@@ -124,6 +136,7 @@
 								value="1000"
 							/>
 						</div>
+						<small class="form-text text-muted">Each order has one booking by default</small>
 					</div>
 					<div class="white_card_body">
 						<h6 class="card-subtitle mb-2">Extra sold tickets</h6>
@@ -134,6 +147,31 @@
 								name="soldTickets"
 								id="inputNumber"
 								value="2000"
+							/>
+						</div>
+						<small class="form-text text-muted">Each booking has one ticket by default</small>
+					</div>
+					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Sold vouchers</h6>
+						<div class=" mb-0">
+							<input
+								type="number"
+								class="form-control"
+								name="soldVouchers"
+								id="soldVouchers"
+								value="500"
+							/>
+						</div>
+					</div>
+					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Sold merchandise</h6>
+						<div class=" mb-0">
+							<input
+								type="number"
+								class="form-control"
+								name="soldMerchandise"
+								id="soldMerchandise"
+								value="400"
 							/>
 						</div>
 					</div>

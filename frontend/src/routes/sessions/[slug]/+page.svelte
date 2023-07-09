@@ -1,14 +1,17 @@
 <script>
 	export let data;
 	const { session } = data;
-	
 
 	var options = {
 		chart: {
 			height: 280,
-			type: 'radialBar'
+			type: 'radialBar',
+			events: {
+				click: function (event, chartContext, config) {
+					alert("todo: take off sale");
+				}
+			}
 		},
-
 		series: [session.capacityTakenPercentage],
 		colors: ['#20E647'],
 		plotOptions: {
@@ -16,7 +19,7 @@
 				hollow: {
 					margin: 0,
 					size: '70%',
-					background: '#293450'
+					background: 'green'
 				},
 				track: {
 					dropShadow: {
@@ -53,7 +56,7 @@
 		stroke: {
 			lineCap: 'round'
 		},
-		labels: ['Sold']
+		labels: ['On Sale']
 	};
 
 	let chart;
@@ -63,8 +66,6 @@
 		chart = new ApexCharts(document.querySelector('[data-chart="sales"]'), options);
 		chart.render();
 	});
-
-
 </script>
 
 <div class="container-fluid p-0">
@@ -93,13 +94,11 @@
 					</div>
 				</div>
 				<div class="white_card_body">
-			
 					<div class="common_form">
 						<form action="#">
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="common_input mb_15">
-									
 										<input type="date" value="2023-01-02" placeholder="" />
 									</div>
 								</div>
@@ -156,21 +155,12 @@
 						<div class="single_plan d-flex align-items-center justify-content-between">
 							<div class="plan_left d-flex align-items-center">
 								<div class="thumb">
-									<img src="/img/icon2/7.svg" alt="" />
-								</div>
-								<div>
-									<h5>On Sale</h5>
-									<span>Click to take off sale</span>
-								</div>
-							</div>
-						</div>
-						<div class="single_plan d-flex align-items-center justify-content-between">
-							<div class="plan_left d-flex align-items-center">
-								<div class="thumb">
 									<img src="/img/icon2/6.svg" alt="" />
 								</div>
 								<div>
-									<h5>{session.capacityTakenExcludingOngoingBookings} places booked</h5>
+									<h5>
+										{session.capacityTakenExcludingOngoingBookings} of {session.capacity} places booked
+									</h5>
 									<span>{session.capacityRemaining} places remaining</span>
 								</div>
 							</div>
@@ -212,8 +202,34 @@
 											<img src="/img/icon2/3.svg" alt="" />
 										</div>
 										<div>
-											<h5>{session.salesAmountString}</h5>
-											<span>Money earnt</span>
+											<h5>{session.totalSalesAmountString}</h5>
+											<span>Total sales</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/4.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.totalSalesAmountAverageString}</h5>
+											<span>Average price</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/4.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.ticketSalesAmountString}</h5>
+											<span>Ticket sales</span>
 										</div>
 									</div>
 								</div>
@@ -238,12 +254,26 @@
 											<img src="/img/icon2/4.svg" alt="" />
 										</div>
 										<div>
-											<h5>{session.salesAmountAverageString}</h5>
-											<span>Average price</span>
+											<h5>{session.merchandiseSalesAmountString}</h5>
+											<span>Merch sales</span>
 										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/1.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.soldMerchandiseCount}</h5>
+											<span>Merch sold</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
@@ -266,19 +296,6 @@
 										<div>
 											<h5>todo</h5>
 											<span>Attendees</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="single_plan d-flex align-items-center justify-content-between">
-									<div class="plan_left d-flex align-items-center">
-										<div class="thumb">
-											<img src="/img/icon2/1.svg" alt="" />
-										</div>
-										<div>
-											<h5>{session.soldMerchandiseCount}</h5>
-											<span>Merch sold</span>
 										</div>
 									</div>
 								</div>
@@ -321,18 +338,18 @@
 				<div class="white_card_body">
 					<div class="row">
 						{#each session.completeBookings as booking}
-						
-						<div class="col-lg-4">
-							<a href="/orders/{booking.orderId}">
-							<div class="single_user_pil d-flex align-items-center justify-content-between">
-								<div class="user_pils_thumb d-flex align-items-center">
-									<span class="f_s_14 f_w_400 text_color_11">{booking.customerName}</span>
-								</div>
-								<div class="user_info">{booking.customerOrderId}</div>
+							<div class="col-lg-4">
+								<a href="/orders/{booking.orderId}">
+									<div class="single_user_pil d-flex align-items-center justify-content-between">
+										<div class="user_pils_thumb d-flex align-items-center">
+											<span class="f_s_14 f_w_400 text_color_11">{booking.customerName}</span>
+										</div>
+										<div class="user_info">{booking.customerOrderId}</div>
+									</div>
+								</a>
 							</div>
-						</a>
-						</div>
-				
+						{:else}
+							<div class="col-lg-4">No bookings for this session yet.</div>
 						{/each}
 					</div>
 				</div>

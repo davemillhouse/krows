@@ -69,6 +69,66 @@
 		});
 	}
 
+	function showTicketTotals() {
+		chart.updateOptions({
+			series: [
+				{
+					data: ordersByDay.soldTicketTotals
+				}
+			],
+			stroke: {
+				colors: ['#b3505091']
+			},
+			yaxis: {
+				labels: {
+					formatter: function (value) {
+						return '£' + value;
+					}
+				}
+			}
+		});
+	}
+
+	function showVoucherTotals() {
+		chart.updateOptions({
+			series: [
+				{
+					data: ordersByDay.soldSupplierVoucherTotals
+				}
+			],
+			stroke: {
+				colors: ['#c388f6']
+			},
+			yaxis: {
+				labels: {
+					formatter: function (value) {
+						return '£' + value;
+					}
+				}
+			}
+		});
+	}
+
+	function showSoldMerchandiseTotals() {
+		chart.updateOptions({
+			series: [
+				{
+					data: ordersByDay.soldMerchandiseTotals
+				}
+			],
+			stroke: {
+				colors: ['#7eb9ff9c']
+			},
+			yaxis: {
+				labels: {
+					formatter: function (value) {
+						return '£' + value;
+					}
+				}
+			}
+		});
+	}
+
 	function showTotals() {
 		chart.updateOptions({
 			series: [
@@ -98,6 +158,26 @@
 			],
 			stroke: {
 				colors: ['#ffd47e9c']
+			},
+			yaxis: {
+				labels: {
+					formatter: function (value) {
+						return value;
+					}
+				}
+			}
+		});
+	}
+
+	function showSoldSupplierVoucherCounts() {
+		chart.updateOptions({
+			series: [
+				{
+					data: ordersByDay.soldSupplierVoucherCounts
+				}
+			],
+			stroke: {
+				colors: ['#ffbe6a']
 			},
 			yaxis: {
 				labels: {
@@ -215,6 +295,26 @@
 							class="single_crm"
 							tabindex="0"
 							role="button"
+							on:keydown={showTotals}
+							on:click={showTotals}
+						>
+							<div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+								<div class="thumb">
+									<img src="img/crm/infographic.svg" alt />
+								</div>
+								<span class="home-card-header" >Total</span>
+							</div>
+							<div class="crm_body">
+								<h4>{ordersByDay.orderTotalString}</h4>
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div
+							class="single_crm"
+							tabindex="0"
+							role="button"
 							on:keydown={showCounts}
 							on:click={showCounts}
 						>
@@ -222,14 +322,36 @@
 								<div class="thumb">
 									<img src="img/crm/businessman.svg" alt />
 								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
+								<span class="home-card-header" >Orders</span>
 							</div>
 							<div class="crm_body">
 								<h4>{ordersByDay.orderCount}</h4>
-								<p>Orders</p>
+							
 							</div>
 						</div>
 					</div>
+
+					<div class="col-lg-6">
+						<div
+							class="single_crm"
+							tabindex="0"
+							role="button"
+							on:keydown={showTicketTotals}
+							on:click={showTicketTotals}
+						>
+							<div class="crm_head crm_bg_10 d-flex align-items-center justify-content-between">
+								<div class="thumb">
+									<img src="img/crm/infographic.svg" alt />
+								</div>
+								<span class="home-card-header" >Ticket sales</span>
+							</div>
+							<div class="crm_body">
+								<h4>{ordersByDay.soldTicketTotalString}</h4>
+								
+							</div>
+						</div>
+					</div>
+
 					<div class="col-lg-6">
 						<div
 							class="single_crm"
@@ -242,45 +364,69 @@
 								<div class="thumb">
 									<img src="img/crm/customer.svg" alt />
 								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
+								<span class="home-card-header" >Sessions</span>
 							</div>
 							<div class="crm_body">
 								<h4>{ordersByDay.sessionCount}</h4>
-								<p>Sessions</p>
+							
 							</div>
 						</div>
 					</div>
+
 					<div class="col-lg-6">
 						<div
 							class="single_crm"
 							tabindex="0"
 							role="button"
-							on:keydown={showTotals}
-							on:click={showTotals}
+							on:keydown={showVoucherTotals}
+							on:click={showVoucherTotals}
 						>
-							<div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+							<div class="crm_head crm_bg_11 d-flex align-items-center justify-content-between">
 								<div class="thumb">
 									<img src="img/crm/infographic.svg" alt />
 								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
+								<span class="home-card-header" >Voucher sales</span>
 							</div>
 							<div class="crm_body">
-								<h4>{ordersByDay.orderTotalString}</h4>
-								<p>Amount taken</p>
+								<h4>{ordersByDay.soldSupplierVoucherTotalString}</h4>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div class="single_crm"
+						tabindex="0"
+						role="button"
+						on:keydown={showSoldSupplierVoucherCounts}
+						on:click={showSoldSupplierVoucherCounts}>
+							<div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+								<div class="thumb">
+									<i class="bi bi-card-text" style="color:white;"></i>
+								</div>
+								<span class="home-card-header" >Vouchers</span>
+							</div>
+							<div class="crm_body">
+								<h4>{ordersByDay.soldSupplierVoucherCount}</h4>
+							
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6">
-						<div class="single_crm">
-							<div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+						<div class="single_crm"
+						tabindex="0"
+						role="button"
+						on:keydown={showSoldMerchandiseTotals}
+						on:click={showSoldMerchandiseTotals}>
+							<div class="crm_head crm_bg_5 d-flex align-items-center justify-content-between">
 								<div class="thumb">
-									<img src="img/crm/sqr.svg" alt />
+									<i class="bi bi-cart">
 								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
+								<span class="home-card-header" >Merch sales</span>
 							</div>
 							<div class="crm_body">
-								<h4>75</h4>
-								<p>Vouchers sold</p>
+								<h4>{ordersByDay.soldMerchandiseTotalString}</h4>
+							
 							</div>
 						</div>
 					</div>
@@ -296,28 +442,15 @@
 								<div class="thumb">
 									<img src="img/crm/infographic.svg" alt />
 								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
+								<span class="home-card-header" >Redemptions</span>
 							</div>
 							<div class="crm_body">
 								<h4>{ordersByDay.voucherRedemptionCount}</h4>
-								<p>Redemptions</p>
+								
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="single_crm">
-							<div class="crm_head crm_bg_5 d-flex align-items-center justify-content-between">
-								<div class="thumb">
-									<img src="img/crm/sqr.svg" alt />
-								</div>
-								<i class="fas fa-ellipsis-h f_s_11 white_text" />
-							</div>
-							<div class="crm_body">
-								<h4>76%</h4>
-								<p>Capacity</p>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -327,7 +460,7 @@
 					<div class="row align-items-center">
 						<div class="col-lg-4">
 							<div class="main-title">
-								<h3 class="m-0">Recent orders</h3>
+								<h3 class="m-0">Recent</h3>
 							</div>
 						</div>
 						<div class="col-lg-8">
@@ -402,7 +535,7 @@
 									<div class="timeLine_inner d-flex align-items-center">
 										<div class="activity_wrap">
 											<h6><Time relative timestamp={session.startDateTimeUtc} /></h6>
-											<p>{session.productName} with <strong>3</strong> guests</p>
+											<p>{session.productName} with <strong>{session.capacityTaken}</strong> guests</p>
 										</div>
 									</div>
 								</li>

@@ -4,19 +4,6 @@
 	export let data;
 	const { session } = data;
 
-
-	let view = 'schedules';
-	let addButtonText = 'Add a schedule';
-
-	function showAddSession() {
-		if (view == 'cards') {
-			addButtonText = 'View schedules';
-		} else {
-			addButtonText = 'Add a schedule';
-		}
-	}
-
-
 </script>
 
 
@@ -33,7 +20,6 @@
                         <li class="breadcrumb-item"><a href="/sessions/{session.id}/comms">Comms</a></li>
                     </ol>
                 </div>
-				<button class="btn_2" on:click={showAddSession}>{addButtonText}</button>
 			</div>
 		</div>
 

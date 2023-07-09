@@ -23,3 +23,23 @@
   margin-right: 10px;
   color:green;
 }
+
+.bi-card-text::before{
+  color:white;
+}
+
+.home-card-header {color:white;}
+
+.shopping-cart table td {
+  vertical-align: top !important;
+}
+
+.shopping-cart table th {
+  padding-bottom:0px;
+  padding-top:0px;
+  padding-left:9px;
+  border: 0;
+}
+
+.ec-event{cursor:pointer;}
+

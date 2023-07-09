@@ -14,7 +14,7 @@
       <li>
         <a href="/" aria-expanded="false">
             <div class="nav_icon_small">
-                <img src="/img/menu-icon/dashboard.svg" alt>
+                <i class="bi bi-house-door"></i>
             </div>
             <div class="nav_title">
                 <span>Home</span>
@@ -26,7 +26,7 @@
         <li>
             <a href="/orders" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="/img/menu-icon/12.svg" alt>
+                    <i class="bi bi-star"></i>
                 </div>
                 <div class="nav_title">
                     <span>Orders</span>
@@ -36,7 +36,7 @@
         <li>
             <a href="/calendar" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="/img/menu-icon/15.svg" alt>
+                    <i class="bi bi-calendar3"></i>
                 </div>
                 <div class="nav_title">
                     <span>Calendar</span>
@@ -46,7 +46,7 @@
         <li>
             <a href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="/img/menu-icon/21.svg" alt>
+                    <i class="bi bi-graph-up"></i>
                 </div>
                 <div class="nav_title">
                     <span>Reports</span>
@@ -64,7 +64,7 @@
             
             <a href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="/img/menu-icon/18.svg" alt>
+                    <i class="bi bi-gear-wide"></i>
                 </div>
                 <div class="nav_title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               
@@ -78,6 +78,7 @@
               <li><a href="/categories">Categories</a></li>
               <li><a href="/products">Products</a></li>
               <li><a href="/tickets">Tickets</a></li>
+              <li><a href="/vouchers">Vouchers</a></li>
               <li><a href="/merchandise">Merchandise</a></li>
               <li><a href="/schedules">Schedules</a></li>
           </ul>
@@ -86,7 +87,7 @@
         <li>
             <a href="/admin" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="/img/menu-icon/18.svg" alt>
+                    <i class="bi bi-gear"></i>
                 </div>
                 <div class="nav_title">
                     <span>Admin</span>
@@ -94,6 +95,8 @@
             </a>
         </li>
     </ul>
+
+
 </nav>
 
 <section class="main_content dashboard_part large_header_bg">
@@ -200,17 +203,7 @@
       </div>
     </div>
 
-    <div class="footer_part">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer_iner text-center">
-                        <p>2023 © krowz - <a href="/terms"> Terms </a> - <a href="/contact"> Contact</a> - <a href="/about"> About</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 </section>
 
 

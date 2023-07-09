@@ -2,14 +2,14 @@
 	export let data;
 	const { order } = data;
 
-	let view = 'schedules';
-	let addButtonText = 'Add a schedule';
+	let view = 'orders';
+	let addButtonText = 'Add an order';
 
 	function showAddProduct() {
 		if (view == 'cards') {
-			addButtonText = 'View schedules';
+			addButtonText = 'View orders';
 		} else {
-			addButtonText = 'Add a schedule';
+			addButtonText = 'Add an order';
 		}
 	}
 </script>

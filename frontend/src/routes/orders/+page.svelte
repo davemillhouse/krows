@@ -62,6 +62,8 @@
 							<div class="user_info"><Time relative timestamp={order.completedDateTimeUtc} /></div>
 						</div>
 					</a>
+					{:else}
+					We didn't find any orders unfortunately.
 					{/each}
 				</div>
 			</div>

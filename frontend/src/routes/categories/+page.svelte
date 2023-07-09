@@ -2,8 +2,6 @@
 	export let data;
 	const { categories } = data;
 
-	console.log(categories);
-
 	let addButtonText = 'Add a category';
 	let listOrCardsText = 'Card view';
 	let view = 'cards';
