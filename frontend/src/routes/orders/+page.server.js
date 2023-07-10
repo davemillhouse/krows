@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { invalidate } from '$app/navigation';
 import 'dotenv/config'
 import { BASE_API_URL } from '$env/static/private'
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -55,7 +56,7 @@ export const actions = {
 
         const searchString = data.get('searchString');
 
-        throw redirect(303, '/orders?searchString=' + searchString);
+        throw redirect(303, '/orders/redirect/' + searchString);
 
         return { success: true };
     }

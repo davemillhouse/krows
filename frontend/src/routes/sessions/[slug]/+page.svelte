@@ -83,11 +83,8 @@
 									<i class="ti-more-alt bi bi-gear" />
 								</span>
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="#"> <i class="ti-trash" /> Delete</a>
-									<a class="dropdown-item" href="#"> <i class="fas fa-edit" /> Edit</a>
-									<a class="dropdown-item" href="#"> <i class="ti-printer" /> Print</a>
-									<a class="dropdown-item" href="#"> <i class="fa fa-download" /> Download</a>
+									<a class="dropdown-item" href="/action"> <i class="ti-eye" /> Action</a>
+									<a class="dropdown-item" href="/delete"> <i class="ti-trash" /> Delete</a>
 								</div>
 							</div>
 						</div>
@@ -115,7 +112,7 @@
 
 								<div class="col-12">
 									<div class="create_report_btn mt_30">
-										<a href="#" class="btn_1 radius_btn d-block text-center">Update</a>
+										<button class="btn btn-primary">update</button>
 									</div>
 								</div>
 							</div>
@@ -137,11 +134,8 @@
 									<i class="ti-more-alt bi bi-gear" />
 								</span>
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="#"> <i class="ti-trash" /> Delete</a>
-									<a class="dropdown-item" href="#"> <i class="fas fa-edit" /> Edit</a>
-									<a class="dropdown-item" href="#"> <i class="ti-printer" /> Print</a>
-									<a class="dropdown-item" href="#"> <i class="fa fa-download" /> Download</a>
+									<a class="dropdown-item" href="action"> <i class="ti-eye" /> Action</a>
+									<a class="dropdown-item" href="delete"> <i class="ti-trash" /> Delete</a>
 								</div>
 							</div>
 						</div>
@@ -182,11 +176,8 @@
 									<i class="ti-more-alt bi bi-gear" />
 								</span>
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="#"> <i class="ti-trash" /> Delete</a>
-									<a class="dropdown-item" href="#"> <i class="fas fa-edit" /> Edit</a>
-									<a class="dropdown-item" href="#"> <i class="ti-printer" /> Print</a>
-									<a class="dropdown-item" href="#"> <i class="fa fa-download" /> Download</a>
+									<a class="dropdown-item" href="action"> <i class="ti-eye" /> Action</a>
+									<a class="dropdown-item" href="delete"> <i class="ti-trash" /> Delete</a>
 								</div>
 							</div>
 						</div>

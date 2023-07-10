@@ -6,6 +6,9 @@
 
 </script>
 
+<svelte:head>
+    <title>Krowz - {session.productName}</title> 
+</svelte:head>
 
 <div class="container-fluid p-0 sm_padding_15px">
 	<div class="row">

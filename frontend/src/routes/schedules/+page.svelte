@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Krowz - Schedules</title> 
+</svelte:head>
+
 <div class="container-fluid p-0">
 	<div class="row justify-content-center">
 		<div class="col-12">

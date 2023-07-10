@@ -2,7 +2,6 @@
 	import Calendar from '@event-calendar/core';
 	import TimeGrid from '@event-calendar/time-grid';
 	import DayGrid from '@event-calendar/day-grid';
-    import { redirect } from '@sveltejs/kit';
 
     function addDays(date, days) {
     var result = new Date(date);
@@ -49,5 +48,9 @@
 
 
 </script>
+
+<svelte:head>
+    <title>Krowz - Calendar</title> 
+</svelte:head>
 
 <Calendar {plugins} {options} />

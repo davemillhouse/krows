@@ -16,8 +16,6 @@
 			view = 'cards'
 			addButtonText = 'Add a voucher';
 		}
-
-		
 	}
 
 	function switchBetweenListAndCards() {
@@ -30,6 +28,10 @@
 		}
 	}
 </script>
+
+<svelte:head>
+    <title>Krowz - Vouchers</title> 
+</svelte:head>
 
 <div class="container-fluid p-0 sm_padding_15px">
 	<div class="row">

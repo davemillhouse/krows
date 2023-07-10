@@ -1,8 +1,12 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { Circle3 } from 'svelte-loading-spinners';
+
+	let working = false;
 
 	export let data;
 	const { products } = data;
+	const { voucher } = data;
 </script>
 
 <div class="container-fluid p-0">
@@ -17,24 +21,55 @@
 					</div>
 				</div>
 				<div class="white_card_body">
-					<h6 class="card-subtitle mb-2">Enter the details of this voucher.</h6>
-					<form>
+				
+					<form
+						method="POST"
+						action="?/update"
+						use:enhance={() => {
+							working = true;
+
+							return async ({ update }) => {
+								await update({ reset: false });
+								working = false;
+							};
+						}}
+					>
+						<input hidden type="text" name="id" bind:value={voucher.id} />
+
 						<div class="mb-3">
-							<label class="form-label" for="exampleInputEmail1">Name</label>
+							<label class="form-label" for="name">Name</label>
 							<input
-								type="email"
+								type="text"
 								class="form-control"
-								id="exampleInputEmail1"
-								aria-describedby="emailHelp"
-								placeholder=""
+								name="name"
+								bind:value={voucher.name}
 							/>
 						</div>
 						<div class="mb-3">
-							<label class="form-label" for="exampleInputPassword1">Description</label>
-							<input class="form-control" id="exampleInputPassword1" placeholder="" />
+							<label class="form-label" for="textColor">Text color</label>
+							<input class="form-control" type="text" name="textColor" bind:value={voucher.textColor} />
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="backgroundColor">Background color</label>
+							<input class="form-control" type="text" name="backgroundColor" bind:value={voucher.backgroundColor} />
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="description">Description</label>
+							<textarea
+								class="form-control"
+								bind:value={voucher.description}
+								id="description"
+								name="description"
+							/>
 						</div>
 
-						<button type="submit" class="btn btn-primary">Submit</button>
+						{#if working}
+							<div style="display:flex;" class="justify-content-center">
+								<Circle3 size="35" />
+							</div>
+						{:else}
+							<button class="btn-primary" type="submit"> Go </button>
+						{/if}
 					</form>
 				</div>
 			</div>
@@ -49,9 +84,8 @@
 
 				<div class="white_card_body">
 					<div>
-
 						{#each products as product}
-						<h4><span class="badge bg-secondary">{product.name}</span></h4>
+							<h4><span class="badge bg-secondary">{product.name}</span></h4>
 						{/each}
 					</div>
 				</div>

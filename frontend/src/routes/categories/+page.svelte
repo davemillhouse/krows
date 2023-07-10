@@ -25,6 +25,10 @@
 	}
 </script>
 
+<svelte:head>
+    <title>Krowz - Categories</title> 
+</svelte:head>
+
 <div class="container-fluid p-0 sm_padding_15px">
 	<div class="row">
 		<div class="col-12">

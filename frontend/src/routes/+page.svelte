@@ -210,6 +210,10 @@
 	}
 </script>
 
+<svelte:head>
+    <title>Krowz - Home</title> 
+</svelte:head>
+
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12">
@@ -472,7 +476,7 @@
 												<div class="search_field">
 													<input type="text" placeholder="Search" />
 												</div>
-												<button type="submit"> <img src="img/icon/icon_search.svg" alt /> </button>
+												<button type="submit"> <img src="/img/icon/icon_search.svg" alt /> </button>
 											</form>
 										</div>
 									</div>

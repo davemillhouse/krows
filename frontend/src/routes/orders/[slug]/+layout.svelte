@@ -14,6 +14,11 @@
 	}
 </script>
 
+<svelte:head>
+    <title>Krowz - Order {order.customerOrderId}</title> 
+	<li><a href="login.html">Bookings</a></li>
+</svelte:head>
+
 <div class="container-fluid p-0 sm_padding_15px">
 	<div class="row">
 		<div class="col-12">
