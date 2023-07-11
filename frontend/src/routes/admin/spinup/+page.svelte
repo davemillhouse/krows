@@ -88,6 +88,7 @@
 							/>
 						</div>
 					</div>
+
 					<div class="white_card_body">
 						<h6 class="card-subtitle mb-2">Vouchers</h6>
 						<div class=" mb-0">
@@ -97,6 +98,18 @@
 								name="vouchers"
 								id="vouchers"
 								value="8"
+							/>
+						</div>
+					</div>
+					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Discount codes</h6>
+						<div class=" mb-0">
+							<input
+								type="number"
+								class="form-control"
+								name="discountCodes"
+								id="discountCodes"
+								value="10"
 							/>
 						</div>
 					</div>
@@ -176,6 +189,18 @@
 						</div>
 					</div>
 					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Sold discount codes</h6>
+						<div class=" mb-0">
+							<input
+								type="number"
+								class="form-control"
+								name="soldDiscountCodes"
+								id="soldDiscountCodes"
+								value="300"
+							/>
+						</div>
+					</div>
+					<div class="white_card_body">
 						<h6 class="card-subtitle mb-2">Stripe payments</h6>
 						<div class=" mb-0">
 							<input
@@ -183,7 +208,7 @@
 								class="form-control"
 								name="stripePayments"
 								id="stripePayments"
-								value="2000"
+								value="300"
 							/>
 						</div>
 					</div>
@@ -195,7 +220,7 @@
 								class="form-control"
 								name="voucherPayments"
 								id="voucherPayments"
-								value="1000"
+								value="200"
 							/>
 						</div>
 					</div>

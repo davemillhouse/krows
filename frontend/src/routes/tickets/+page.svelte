@@ -3,36 +3,180 @@
 
 	export let data;
 	const { tickets } = data;
+	const { dataByDay } = data;
+	const { topSellers } = data;
+
+	let view = 'list';
+
+	const topSellersData = topSellers
+		.map((item) => {
+			return {
+				x: item.name,
+				y: item.soldCount
+			};
+		})
+		.sort((a, b) => b.y - a.y);
+
+	const salesByTicketData = topSellers
+		.map((item) => {
+			return {
+				x: item.name,
+				y: item.soldAmount
+			};
+		})
+		.sort((a, b) => b.y - a.y);
 
 	let addButtonText = 'Add a ticket';
-	let listOrCardsText = 'Cards';
-	let view = 'cards';
 
 	function showAddTicket() {
 		if (view == 'cards') {
 			view = 'add';
 			addButtonText = 'View tickets';
 		} else {
-			view = 'cards'
+			view = 'cards';
 			addButtonText = 'Add a ticket';
 		}
-
-		
 	}
 
-	function switchBetweenListAndCards() {
-		if (view == 'cards') {
-			listOrCardsText = 'List';
-			view = 'list';
-		} else {
-			listOrCardsText = 'Cards';
-			view = 'cards';
+	let salesByTicketChartOptions = {
+		grid: {
+			show: false
+		},
+		dataLabels: {
+			enabled: true,
+			formatter: function (val) {
+				return '£' + val.toLocaleString();
+			}
+		},
+		tooltip: {
+			y: {
+				formatter: function (val) {
+					return '£' + val.toLocaleString();
+				}
+			}
+		},
+		colors: ['#ffbe6a'],
+		chart: {
+			height: '100%',
+			type: 'bar',
+			toolbar: {
+				show: false
+			}
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true
+			}
+		},
+		series: [
+			{
+				name: 'Amount',
+				data: salesByTicketData
+			}
+		],
+		xaxis: {
+			labels: {
+				show: false
+			}
 		}
-	}
+	};
+
+	let topSellersChartOptions = {
+		grid: {
+			show: false
+		},
+		colors: ['#20deff'],
+		chart: {
+			height: '100%',
+			type: 'bar',
+			toolbar: {
+				show: false
+			}
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true
+			}
+		},
+		series: [
+			{
+				name: 'Sold',
+				data: topSellersData
+			}
+		],
+		xaxis: {
+			labels: {
+				show: false
+			}
+		}
+	};
+
+	let soldTicketTotalsOptions = {
+		chart: {
+			type: 'line',
+			height: '100%',
+			toolbar: {
+				show: false
+			}
+		},
+		series: [
+			{
+				name: 'Amount',
+				data: dataByDay.soldTicketTotals
+			}
+		],
+		xaxis: {
+			categories: dataByDay.orderDates
+		},
+		yaxis: {
+			labels: {
+				formatter: function (value) {
+					return '£' + value;
+				}
+			}
+		},
+		tooltip: {
+			enabled: true,
+			formatter: function (val) {
+				return '£' + val.toLocaleString();
+			}
+		},
+		stroke: {
+			show: true,
+			curve: 'smooth',
+			colors: ['#c388f6'],
+			width: 4
+		}
+	};
+
+	let soldTicketTotalsChart;
+	let topSellersChart;
+	let salesByTicketChart;
+
+	import { onMount } from 'svelte';
+	onMount(() => {
+		soldTicketTotalsChart = new ApexCharts(
+			document.querySelector('[data-chart="soldTicketTotalsChart"]'),
+			soldTicketTotalsOptions
+		);
+		soldTicketTotalsChart.render();
+
+		topSellersChart = new ApexCharts(
+			document.querySelector('[data-chart="topSellersChart"]'),
+			topSellersChartOptions
+		);
+		topSellersChart.render();
+
+		salesByTicketChart = new ApexCharts(
+			document.querySelector('[data-chart="salesByTicketChart"]'),
+			salesByTicketChartOptions
+		);
+		salesByTicketChart.render();
+	});
 </script>
 
 <svelte:head>
-    <title>Krowz - Tickets</title> 
+	<title>Krowz - Tickets</title>
 </svelte:head>
 
 <div class="container-fluid p-0 sm_padding_15px">
@@ -42,95 +186,92 @@
 				<div class="page_title_left">
 					<h3 class="f_s_30 f_w_700 dark_text">Your tickets</h3>
 					<ol class="breadcrumb page_bradcam mb-0">
-						<li class="breadcrumb-item active">
-							
-							<button on:click={switchBetweenListAndCards}>{listOrCardsText}</button>
-						</li>
+						<ol class="breadcrumb page_bradcam mb-0">
+							<li class="breadcrumb-item">Reports</li>
+							<li class="breadcrumb-item">Reorder</li>
+							<li class="breadcrumb-item">Help</li>
+						</ol>
 					</ol>
 				</div>
 				<button class="btn_2" on:click={showAddTicket}>{addButtonText}</button>
 			</div>
 		</div>
 
-		{#if view == 'list'}
-			<div class="row justify-content-center">
-				<div class="col-lg-12">
-					<div class="white_card card_height_100 mb_30">
-						<div class="white_card_header">
-							<div class="box_header m-0">
-								<div class="main-title">
-									<h3 class="m-0">Ticket List</h3>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<div class="row">
+					{#each tickets as ticket}
+						<div class="col-lg-12">
+							<a href="/tickets/{ticket.id}">
+								<div class="white_card card_height_100 mb_30 justify-content-between">
+									<div class="white_card_body pt_30">
+										<div class="d-flex justify-content-between">
+											<div class="h-100 mr_10">
+												<div
+													class="activity-bell-t3"
+													style="background-color: {ticket.backgroundColor}"
+												/>
+											</div>
+											<div class="timeLine_inner d-flex align-items-center w-100">
+												<div class="activity_wrap">
+													<h6>{ticket.name}</h6>
+													<p>{ticket.description}</p>
+												</div>
+											</div>
+											<div class="timeLine_inner d-flex align-items-center">
+												<div class="activity_wrap">
+													<h6>{ticket.salesPriceString}</h6>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+							</a>
+						</div>{/each}
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="white_card mb_30 user_crm_wrapper">
+					<div class="single_crm">
+						<div class="crm_head crm_bg_11 d-flex align-items-center justify-content-between">
+							<div class="thumb">
+								<img src="img/crm/infographic.svg" alt />
 							</div>
+							<span class="home-card-header">sales by ticket</span>
 						</div>
-						<div class="white_card_body">
-							<table class="table table-striped">
-								<th>Name</th>
-								<th>Description</th>
-								<tbody>
-									{#each tickets as ticket}
-										<tr>
-											<td>{ticket.name}</td>
-											<td>{ticket.description}</td>
-										</tr>
-									{/each}
-								</tbody>
-							</table>
+						<div class="white_card_body_graph mb_20" style="height:250px;">
+							<div data-chart="salesByTicketChart" />
+						</div>
+					</div>
+				</div>
+				<div class="white_card mb_30 user_crm_wrapper">
+					<div class="single_crm">
+						<div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+							<div class="thumb">
+								<img src="img/crm/infographic.svg" alt />
+							</div>
+							<span class="home-card-header">{dataByDay.soldTicketTotalString} ticket sales</span>
+						</div>
+						<div class="white_card_body_graph mb_20" style="height:250px;">
+							<div data-chart="soldTicketTotalsChart" />
+						</div>
+					</div>
+				</div>
+				<div class="white_card mb_30 user_crm_wrapper">
+					<div class="single_crm">
+						<div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+							<div class="thumb">
+								<img src="img/crm/infographic.svg" alt />
+							</div>
+							<span class="home-card-header">top sellers</span>
+						</div>
+						<div class="white_card_body_graph mb_20" style="height:250px;">
+							<div data-chart="topSellersChart" />
 						</div>
 					</div>
 				</div>
 			</div>
-		{/if}
-		{#if view == 'cards'}
-			{#each tickets as ticket}
-				<div class="col-lg-4">
-					<a href="tickets/{ticket.id}">
-						<div
-							class="card_box box_shadow position-relative mb_30"
-							style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
-						>
-							<div
-								class="white_box_tittle"
-								style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
-							>
-								<div class="main-title2">
-									<h4 class="mb-2 text_white">{ticket.name}</h4>
-								</div>
-							</div>
-							<div class="box_body">
-								<p
-									class="f-w-400"
-									style="background-color: {ticket.backgroundColor};color: {ticket.textColor}"
-								>
-									{ticket.description}
-								</p>
-							</div>
-						</div>
-					</a>
-				</div>
-			
-				{:else}
-				<div class="col-xl-8">
-					<div class="white_card mb_30 card_height_100" style="max-height:460px;">
-						<div class="white_card_header">
-							<div class="row align-items-center justify-content-between flex-wrap">
-								<div class="col-lg-4">
-									<div class="main-title">
-										<h3 class="m-0">No tickets</h3>
-									</div>
-								</div>
-							
-							</div>
-						</div>
-						<div class="white_card_body" style="height:100%;max-height:378px;">
-							You do not have any tickets as yet.
-						</div>
-					</div>
-				</div>
-				{/each}
-	
-	
-		{/if}
+		</div>
 
 		{#if view == 'add'}
 			<div class="col-lg-6">
@@ -157,9 +298,7 @@
 									aria-describedby="emailHelp"
 									placeholder="Description"
 								/>
-								<small id="emailHelp" class="form-text text-muted"
-									>Not too long!</small
-								>
+								<small id="emailHelp" class="form-text text-muted">Not too long!</small>
 							</div>
 
 							<div class="mb-3 form-check">

@@ -84,6 +84,22 @@
 											<td>{soldMerchandise.totalSalesAmountString}</td>
 										</tr>
 									{/each}
+									{#each booking.soldDiscountCodes as discountCode}
+										<tr>
+											<td>
+												
+												<p
+													class="d-inline-block align-middle mb-0 product-name f_s_16 f_w_600 color_theme2"
+												>
+													{discountCode.name}
+												</p>
+												<div>discount code</div>
+											</td>
+											<td>1</td>
+											<td>{discountCode.salesAmountString}</td>
+											<td>{discountCode.salesAmountString}</td>
+										</tr>
+									{/each}
 								</tbody>
 							</table>
 						</div>

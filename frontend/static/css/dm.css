@@ -24,6 +24,18 @@
   color:green;
 }
 
+.activity-bell{width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 5px;
+  position: relative;}
+
+  .activity-bell-t3{width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    top: 3px;
+    position: relative;}
+
 .bi-card-text::before{
   color:white;
 }
@@ -42,4 +54,8 @@
 }
 
 .ec-event{cursor:pointer;}
+
+.white_card .white_card_body_graph {
+  padding:5px 6px 0px;
+}
 

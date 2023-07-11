@@ -15,20 +15,30 @@ export const load = async () => {
     }
 }
 
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
 export const actions = {
-	create: async ({ request }) => {
-		const data = await request.formData();
+    create: async ({ cookies, request }) => {
+        const data = await request.formData();
+  
+        const name = data.get('name');
+        const description = data.get('description');
 
-        const name = data.get('name')
-
-        const payload = JSON.stringify({ name });
+        const payload = JSON.stringify({ name, description });
         
-        const res = await fetch(BASE_API_URL + '/categories', {
+        const res = await fetch(BASE_API_URL + 'categories', {
             method: 'POST',
             body: payload,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-	}
+
+        return { success: true };
+    }
 };
+

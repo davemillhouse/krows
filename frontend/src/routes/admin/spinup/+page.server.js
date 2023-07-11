@@ -22,10 +22,12 @@ export const actions = {
         const supplierVouchers = data.get('vouchers');
             const soldSupplierVouchers = data.get('soldVouchers');
         const soldMerchandise = data.get('soldMerchandise');
+        const discountCodes = data.get('discountCodes');
+        const soldDiscountCodes = data.get('soldDiscountCodes');
 
         const payload = JSON.stringify({ products, categories, voucherPayments, cashPayments, 
             stripePayments, orders, bookings, sessions, merchandise, tickets, soldTickets,supplierVouchers,soldSupplierVouchers,
-            soldMerchandise });
+            soldMerchandise, discountCodes, soldDiscountCodes });
     
         const res = await fetch(BASE_API_URL + 'spinup', {
             method: 'POST',

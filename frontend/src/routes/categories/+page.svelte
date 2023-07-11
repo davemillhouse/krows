@@ -1,32 +1,81 @@
 <script>
+	import { enhance } from '$app/forms';
+
 	export let data;
 	const { categories } = data;
 
+	console.log(categories);
+
+	let view = 'list';
+
+	const categoriesData = categories
+		.map((item) => {
+			return {
+				x: item.name,
+				y: item.productCount
+			};
+		})
+		.sort((a, b) => b.y - a.y);
+
 	let addButtonText = 'Add a category';
-	let listOrCardsText = 'Card view';
-	let view = 'cards';
 
 	function showAddCategory() {
 		if (view == 'cards') {
+			view = 'add';
 			addButtonText = 'View categories';
 		} else {
+			view = 'cards';
 			addButtonText = 'Add a category';
 		}
 	}
 
-	function switchBetweenListAndCards() {
-		if (view == 'cards') {
-			listOrCardsText = 'List view';
-			view = 'list';
-		} else {
-			listOrCardsText = 'Card view';
-			view = 'cards';
+	let categoriesChartOptions = {
+		grid: {
+			show: false
+		},
+		colors: ['#20deff'],
+		chart: {
+			height: '100%',
+			type: 'bar',
+			toolbar: {
+				show: false
+			}
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true
+			}
+		},
+		series: [
+			{
+				name: 'Products',
+				data: categoriesData
+			}
+		],
+		xaxis: {
+			labels: {
+				show: false
+			}
 		}
-	}
+	};
+
+
+	let categoriesChart;
+
+	import { onMount } from 'svelte';
+	onMount(() => {
+
+		categoriesChart = new ApexCharts(
+			document.querySelector('[data-chart="categoriesChart"]'),
+			categoriesChartOptions
+		);
+		categoriesChart.render();
+
+	});
 </script>
 
 <svelte:head>
-    <title>Krowz - Categories</title> 
+	<title>Krowz - Categories</title>
 </svelte:head>
 
 <div class="container-fluid p-0 sm_padding_15px">
@@ -36,84 +85,104 @@
 				<div class="page_title_left">
 					<h3 class="f_s_30 f_w_700 dark_text">Your categories</h3>
 					<ol class="breadcrumb page_bradcam mb-0">
-						
-						<li class="breadcrumb-item active">
-							<button on:click={switchBetweenListAndCards}>{listOrCardsText}</button>
-						</li>
+						<ol class="breadcrumb page_bradcam mb-0">
+							<li class="breadcrumb-item">Reports</li>
+							<li class="breadcrumb-item">Reorder</li>
+							<li class="breadcrumb-item">Help</li>
+						</ol>
 					</ol>
 				</div>
 				<button class="btn_2" on:click={showAddCategory}>{addButtonText}</button>
 			</div>
 		</div>
 
-		{#if view == 'list'}
-			<div class="row justify-content-center">
-				<div class="col-lg-12">
-					<div class="white_card card_height_100 mb_30">
-						<div class="white_card_header">
-							<div class="box_header m-0">
-								<div class="main-title">
-									<h3 class="m-0">Category List</h3>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<div class="row">
+					{#each categories as category}
+						<div class="col-lg-12">
+							<a href="/categories/{category.id}">
+								<div class="white_card card_height_100 mb_30 justify-content-between">
+									<div class="white_card_body pt_30">
+										<div class="d-flex justify-content-between">
+											<div class="h-100 mr_10">
+												<div
+													class="activity-bell-t3"
+													style="background-color: {category.backgroundColor}"
+												/>
+											</div>
+											<div class="timeLine_inner d-flex align-items-center w-100">
+												<div class="activity_wrap">
+													<h6>{category.name}</h6>
+													<p>{category.description}</p>
+												</div>
+											</div>
+											<div class="timeLine_inner d-flex align-items-center">
+												<div class="activity_wrap">
+													<h6>{category.productCount} products</h6>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+							</a>
+						</div>{/each}
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="white_card mb_30 user_crm_wrapper">
+					<div class="single_crm">
+						<div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+							<div class="thumb">
+								<img src="img/crm/infographic.svg" alt />
 							</div>
+							<span class="home-card-header">categories</span>
 						</div>
-						<div class="white_card_body">
-							<table class="table table-striped">
-								<th>Name</th>
-								<th>Description</th>
-								<tbody>
-									{#each categories as category}
-										<tr>
-											<td>{category.name}!</td>
-											<td>{category.description}</td>
-										</tr>
-									{/each}
-								</tbody>
-							</table>
-							
+						<div class="white_card_body_graph mb_20" style="height:250px;">
+							<div data-chart="categoriesChart" />
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			
-		{/if}
-		{#if view == 'cards'}
-			{#each categories as category}
-				<div class="col-lg-4">
-					<a href="categories/{category.id}">
-						<div
-							class="card_box box_shadow position-relative mb_30"
-							style="background-color: {category.backgroundColor};color: {category.textColor}"
-						>
-							<div
-								class="white_box_tittle"
-								style="background-color: {category.backgroundColor};color: {category.textColor}"
-							>
-								<div class="main-title2">
-									<h4 class="mb-2 text_white">{category.name}</h4>
-								</div>
-							</div>
-							<div class="box_body">
-								<p
-									class="f-w-400"
-									style="background-color: {category.backgroundColor};color: {category.textColor}"
-								>
-								{category.description}
-								</p>
+		{#if view == 'add'}
+			<div class="col-lg-6">
+				<div class="white_card card_height_100 mb_30">
+					<div class="white_card_header">
+						<div class="box_header m-0">
+							<div class="main-title">
+								<h3 class="m-0">Create a category for sale</h3>
 							</div>
 						</div>
-					</a>
+					</div>
+					<div class="white_card_body">
+						<h6 class="card-subtitle mb-2">Insert the details below</h6>
+						<form method="POST" action="?/create" use:enhance>
+							<div class="mb-3">
+								<label class="form-label" for="exampleInputPassword1">Name</label>
+								<input name="name" autocomplete="off" class="form-control" placeholder="Name" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="exampleInputEmail1">Description</label>
+								<input
+									class="form-control"
+									name="description"
+									aria-describedby="emailHelp"
+									placeholder="Description"
+								/>
+								<small id="emailHelp" class="form-text text-muted">Not too long!</small>
+							</div>
+
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1" />
+								<label class="form-label form-check-label" for="exampleCheck1">Check me out</label>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
 				</div>
-			{/each}
-		{/if}
-		{#if view == 'add'}
-			<form method="POST" action="?/create">
-				<label>
-					add a category
-					<input name="name" autocomplete="off" />
-				</label>
-			</form>
+			</div>
 		{/if}
 	</div>
 </div>

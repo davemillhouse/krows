@@ -64,33 +64,51 @@
             
             <a href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <i class="bi bi-gear-wide"></i>
+                    <i class="bi bi-basket3"></i>
                 </div>
                 <div class="nav_title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               
-                        Setup
+                        Selling
                    
                 </div>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       
             <ul>
-              <li><a href="/categories">Categories</a></li>
               <li><a href="/products">Products</a></li>
               <li><a href="/tickets">Tickets</a></li>
               <li><a href="/vouchers">Vouchers</a></li>
               <li><a href="/merchandise">Merchandise</a></li>
-              <li><a href="/schedules">Schedules</a></li>
           </ul>
           </div>
         </li>
         <li>
-            <a href="/admin" aria-expanded="false">
+            
+            <a href="#" aria-expanded="false">
                 <div class="nav_icon_small">
                     <i class="bi bi-gear"></i>
                 </div>
+                <div class="nav_title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              
+                        Config
+                   
+                </div>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      
+            <ul>
+              <li><a href="/categories">Categories</a></li>
+              <li><a href="/discountcodes">Discount codes</a></li>
+          </ul>
+          </div>
+        </li>
+        <li class="mt-5">
+            <a href="/admin" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <i class="bi bi-globe"></i>
+                </div>
                 <div class="nav_title">
-                    <span>Admin</span>
+                    <span>Power users</span>
                 </div>
             </a>
         </li>

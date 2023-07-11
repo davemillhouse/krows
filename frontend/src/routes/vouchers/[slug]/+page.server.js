@@ -24,11 +24,8 @@ export const actions = {
         const description = formData.get('description');
         const id = formData.get('id');
 
-
         const payload = JSON.stringify(Object.fromEntries(formData.entries()));
 
-
-    
         const res = await fetch(BASE_API_URL + 'suppliervouchers', {
             method: 'PUT',
             body: payload,
@@ -36,8 +33,6 @@ export const actions = {
                 'Content-Type': 'application/json'
             }
         });
-
-
 
         return { success: true };
     }

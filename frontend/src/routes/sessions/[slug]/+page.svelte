@@ -203,15 +203,16 @@
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
 										<div class="thumb">
-											<img src="/img/icon2/4.svg" alt="" />
+											<img src="/img/icon2/2.svg" alt="" />
 										</div>
 										<div>
-											<h5>{session.totalSalesAmountAverageString}</h5>
-											<span>Average price</span>
+											<h5>{session.completeBookingCount}</h5>
+											<span>Bookings</span>
 										</div>
 									</div>
 								</div>
 							</div>
+	
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
@@ -238,6 +239,7 @@
 									</div>
 								</div>
 							</div>
+							{#if session.soldMerchandiseCount > 0}
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
@@ -264,7 +266,21 @@
 									</div>
 								</div>
 							</div>
-
+							{/if}
+							{#if session.soldDiscountCodeCount > 0}
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/3.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.discountCodeSalesAmountString}</h5>
+											<span>Discounts applied</span>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
@@ -272,12 +288,27 @@
 											<img src="/img/icon2/2.svg" alt="" />
 										</div>
 										<div>
-											<h5>{session.completeBookingCount}</h5>
-											<span>Bookings</span>
+											<h5>{session.soldDiscountCodeCount}</h5>
+											<span>Discount codes</span>
 										</div>
 									</div>
 								</div>
 							</div>
+							{/if}
+							<div class="col-lg-6">
+								<div class="single_plan d-flex align-items-center justify-content-between">
+									<div class="plan_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="/img/icon2/4.svg" alt="" />
+										</div>
+										<div>
+											<h5>{session.totalSalesAmountAverageString}</h5>
+											<span>Average price</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">

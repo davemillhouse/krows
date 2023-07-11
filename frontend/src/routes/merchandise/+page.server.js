@@ -10,11 +10,38 @@ export const load = async () => {
         return data;
     }
 
+    const fetchDataByDay = async () => {
+        let startDate = addDays(new Date(), -7).toJSON();
+        let url = 'ordersbyday?IncludeSoldMerchandiseTotal=true&fromCompletedDateUtc=' + startDate
+
+        const res = await fetch(BASE_API_URL + url)
+        const data = await res.json();
+
+        return data;
+    }
+
+    const fetchTopSellers = async () => {
+        let startDate = addDays(new Date(), -7).toJSON();
+        let url = 'soldMerchandise/amountSold'
+
+        const res = await fetch(BASE_API_URL + url)
+        const data = await res.json();
+
+        return data;
+    }
+
     return {
         merchandise: fetchMerchandise(),
+        dataByDay: fetchDataByDay(),
+        topSellers: fetchTopSellers()
     }
 }
 
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
 
 export const actions = {
     create: async ({ cookies, request }) => {

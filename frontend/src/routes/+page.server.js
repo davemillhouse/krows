@@ -6,16 +6,16 @@ export const actions = {
     search: async ({ request }) => {
 
         const formData = await request.formData();
-        const daysToSearch = formData.get('daysToSearch')
+        const daysToSearch = formData.get('daysToSearch');
+        console.log(daysToSearch);
 
         let startDate = addDays(new Date(), -daysToSearch).toJSON();
-        let sessionUrl = 'ordersbyday?fromCompletedDateUtc=' + startDate;
-        const res = await fetch(BASE_API_URL + sessionUrl)
+        let url = 'ordersbyday?IncludeOrderCount=true&IncludeSoldSupplierVoucherCount=true&IncludeSoldTicketCount=true&IncludePaymentAmountTotal=true&fromCompletedDateUtc=' + startDate
+
+        const res = await fetch(BASE_API_URL + url)
         const data = await res.json();
 
         return data;
-
-
     }
 };
 
@@ -29,7 +29,7 @@ export const load = async () => {
 
     const fetchSessions = async () => {
         let startDate = new Date().toJSON();
-        let sessionUrl = 'sessions?fromDateTimeUtc=' + startDate + '&pageSize=10'
+        let sessionUrl = 'sessions?fromDateTimeUtc=' + startDate + '&pageSize=7'
         const res = await fetch(BASE_API_URL + sessionUrl)
         const data = await res.json();
 
@@ -38,7 +38,7 @@ export const load = async () => {
 
     const fetchOrders = async () => {
         let startDate = new Date().toJSON();
-        let sessionUrl = 'orders?toCompletedDateUtc=' + startDate + '&pageSize=10'
+        let sessionUrl = 'orders?toCompletedDateUtc=' + startDate + '&pageSize=9'
         const res = await fetch(BASE_API_URL + sessionUrl)
         const data = await res.json();
 
@@ -47,8 +47,10 @@ export const load = async () => {
 
     const fetchOrdersByDay = async () => {
         let startDate = addDays(new Date(), -7).toJSON();
-        let sessionUrl = 'ordersbyday?fromCompletedDateUtc=' + startDate;
-        const res = await fetch(BASE_API_URL + sessionUrl)
+        let url = 'ordersbyday?IncludeOrderCount=true&IncludeSoldSupplierVoucherCount=true&IncludeSoldTicketCount=true&IncludePaymentAmountTotal=true&fromCompletedDateUtc=' + startDate
+
+
+        const res = await fetch(BASE_API_URL + url)
         const data = await res.json();
 
         return data;
@@ -59,6 +61,5 @@ export const load = async () => {
         orders: fetchOrders(),
         ordersByDay: fetchOrdersByDay()
     }
-
-
 }
+
