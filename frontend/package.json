@@ -17,6 +17,7 @@
 		"@event-calendar/resource-time-grid": "^1.5.0",
 		"@event-calendar/time-grid": "^1.5.0",
 		"@playwright/test": "^1.25.0",
+		"@rgossiaux/svelte-headlessui": "^2.0.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "^1.20.2",
 		"eslint": "^8.16.0",

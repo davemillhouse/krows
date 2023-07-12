@@ -2,6 +2,7 @@
 	import { Circle3 } from 'svelte-loading-spinners';
 	import Time from 'svelte-time';
 	import { enhance } from '$app/forms';
+	import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
 
 	export let data;
 	const { sessions } = data;
@@ -368,20 +369,16 @@
 						<div class="main-title">
 							<h3 class="m-0">Upcoming</h3>
 						</div>
-						<div class="header_more_tool">
-							<div class="dropdown">
-								<span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
-									<i class="ti-more-alt bi bi-gear" />
-								</span>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<i class="ti-eye" /> Action
-									<i class="ti-trash" /> Delete
-									<i class="fas fa-edit" /> Edit
-									<i class="ti-printer" /> Print
-									<i class="fa fa-download" /> Download
-								</div>
-							</div>
-						</div>
+						<Popover class="relative">
+							<PopoverButton class="popoverButton bi bi-gear" />
+							<PopoverPanel
+								class="dropdown-item-container"
+								style="position: absolute; z-index: 10;"
+							>
+								<a class="dropdown-item"> <i class="bi bi-cog" /> Show just happened</a>
+								<a class="dropdown-item"> <i class="bi bi-cog" /> Show only booked</a>
+							</PopoverPanel>
+						</Popover>
 					</div>
 				</div>
 				<div class="white_card_body">

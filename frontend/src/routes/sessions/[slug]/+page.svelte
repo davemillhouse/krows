@@ -1,4 +1,10 @@
 <script>
+	import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
+	import { enhance } from '$app/forms';
+	import { Circle3 } from 'svelte-loading-spinners';
+
+	let working = false;
+
 	export let data;
 	const { session } = data;
 
@@ -8,7 +14,7 @@
 			type: 'radialBar',
 			events: {
 				click: function (event, chartContext, config) {
-					alert("todo: take off sale");
+					alert('todo: take off sale');
 				}
 			}
 		},
@@ -78,41 +84,73 @@
 							<h3 class="m-0">Session details</h3>
 						</div>
 						<div class="header_more_tool">
-							<div class="dropdown">
-								<span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
-									<i class="ti-more-alt bi bi-gear" />
-								</span>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="/action"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="/delete"> <i class="ti-trash" /> Delete</a>
-								</div>
-							</div>
+							<Popover class="relative">
+								<PopoverButton class="popoverButton bi bi-gear" />
+								<PopoverPanel
+									class="dropdown-item-container"
+									style="position: absolute; z-index: 10;"
+								>
+									<a class="dropdown-item"> <i class="bi bi-cog" /> Archive</a>
+								</PopoverPanel>
+							</Popover>
 						</div>
 					</div>
 				</div>
 				<div class="white_card_body">
 					<div class="common_form">
-						<form action="#">
+						<form
+							method="POST"
+							action="/sessions?/update"
+							use:enhance={() => {
+								working = true;
+
+								return async ({ update }) => {
+									await update({ reset: false });
+									working = false;
+								};
+							}}
+						>
+							<input hidden type="text" name="id" bind:value={session.id} />
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-lg-6">
 									<div class="common_input mb_15">
-										<input type="date" value="2023-01-02" placeholder="" />
+										Start
+										<input bind:value={session.startDateTimeUtc} type="date" placeholder="" />
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="common_input mb_15">
-										<input value="" placeholder="" />
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="common_input mb_15">
+										Time
 										<input type="time" placeholder="" />
 									</div>
 								</div>
-
+								<div class="col-lg-6">
+									<div class="common_input mb_15">
+										End
+										<input bind:value={session.endDateTimeUtc} type="date" placeholder="" />
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="common_input mb_15">
+										Time
+										<input type="time" placeholder="" />
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="common_input mb_15">
+										Capacity
+										<input name="capacity" type="number" bind:value={session.capacity} />
+									</div>
+								</div>
 								<div class="col-12">
 									<div class="create_report_btn mt_30">
-										<button class="btn btn-primary">update</button>
+										{#if working}
+											<div style="display:flex;" class="justify-content-center">
+												<Circle3 size="35" />
+											</div>
+										{:else}
+											<button class="btn-primary" type="submit"> Update </button>
+										{/if}
 									</div>
 								</div>
 							</div>
@@ -128,17 +166,15 @@
 						<div class="main-title">
 							<h3 class="m-0">Sales</h3>
 						</div>
-						<div class="header_more_tool">
-							<div class="dropdown">
-								<span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
-									<i class="ti-more-alt bi bi-gear" />
-								</span>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="action"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="delete"> <i class="ti-trash" /> Delete</a>
-								</div>
-							</div>
-						</div>
+						<Popover class="relative">
+							<PopoverButton class="popoverButton bi bi-gear" />
+							<PopoverPanel
+								class="dropdown-item-container"
+								style="position: absolute; z-index: 10;"
+							>
+								<a class="dropdown-item"> <i class="bi bi-cog" /> Take off sale</a>
+							</PopoverPanel>
+						</Popover>
 					</div>
 				</div>
 				<div class="white_card_body" style="position: relative;">
@@ -170,17 +206,15 @@
 						<div class="main-title">
 							<h3 class="m-0">Sales Details</h3>
 						</div>
-						<div class="header_more_tool">
-							<div class="dropdown">
-								<span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
-									<i class="ti-more-alt bi bi-gear" />
-								</span>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="action"> <i class="ti-eye" /> Action</a>
-									<a class="dropdown-item" href="delete"> <i class="ti-trash" /> Delete</a>
-								</div>
-							</div>
-						</div>
+						<Popover class="relative">
+							<PopoverButton class="popoverButton bi bi-gear" />
+							<PopoverPanel
+								class="dropdown-item-container"
+								style="position: absolute; z-index: 10;"
+							>
+								<a class="dropdown-item"> <i class="bi bi-cog" /> Report on this</a>
+							</PopoverPanel>
+						</Popover>
 					</div>
 				</div>
 				<div class="white_card_body pb-0">
@@ -212,7 +246,7 @@
 									</div>
 								</div>
 							</div>
-	
+
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">
@@ -240,60 +274,60 @@
 								</div>
 							</div>
 							{#if session.soldMerchandiseCount > 0}
-							<div class="col-lg-6">
-								<div class="single_plan d-flex align-items-center justify-content-between">
-									<div class="plan_left d-flex align-items-center">
-										<div class="thumb">
-											<img src="/img/icon2/4.svg" alt="" />
-										</div>
-										<div>
-											<h5>{session.merchandiseSalesAmountString}</h5>
-											<span>Merch sales</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="single_plan d-flex align-items-center justify-content-between">
-									<div class="plan_left d-flex align-items-center">
-										<div class="thumb">
-											<img src="/img/icon2/1.svg" alt="" />
-										</div>
-										<div>
-											<h5>{session.soldMerchandiseCount}</h5>
-											<span>Merch sold</span>
+								<div class="col-lg-6">
+									<div class="single_plan d-flex align-items-center justify-content-between">
+										<div class="plan_left d-flex align-items-center">
+											<div class="thumb">
+												<img src="/img/icon2/4.svg" alt="" />
+											</div>
+											<div>
+												<h5>{session.merchandiseSalesAmountString}</h5>
+												<span>Merch sales</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+								<div class="col-lg-6">
+									<div class="single_plan d-flex align-items-center justify-content-between">
+										<div class="plan_left d-flex align-items-center">
+											<div class="thumb">
+												<img src="/img/icon2/1.svg" alt="" />
+											</div>
+											<div>
+												<h5>{session.soldMerchandiseCount}</h5>
+												<span>Merch sold</span>
+											</div>
+										</div>
+									</div>
+								</div>
 							{/if}
 							{#if session.soldDiscountCodeCount > 0}
-							<div class="col-lg-6">
-								<div class="single_plan d-flex align-items-center justify-content-between">
-									<div class="plan_left d-flex align-items-center">
-										<div class="thumb">
-											<img src="/img/icon2/3.svg" alt="" />
-										</div>
-										<div>
-											<h5>{session.discountCodeSalesAmountString}</h5>
-											<span>Discounts applied</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="single_plan d-flex align-items-center justify-content-between">
-									<div class="plan_left d-flex align-items-center">
-										<div class="thumb">
-											<img src="/img/icon2/2.svg" alt="" />
-										</div>
-										<div>
-											<h5>{session.soldDiscountCodeCount}</h5>
-											<span>Discount codes</span>
+								<div class="col-lg-6">
+									<div class="single_plan d-flex align-items-center justify-content-between">
+										<div class="plan_left d-flex align-items-center">
+											<div class="thumb">
+												<img src="/img/icon2/3.svg" alt="" />
+											</div>
+											<div>
+												<h5>{session.discountCodeSalesAmountString}</h5>
+												<span>Discounts applied</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+								<div class="col-lg-6">
+									<div class="single_plan d-flex align-items-center justify-content-between">
+										<div class="plan_left d-flex align-items-center">
+											<div class="thumb">
+												<img src="/img/icon2/2.svg" alt="" />
+											</div>
+											<div>
+												<h5>{session.soldDiscountCodeCount}</h5>
+												<span>Discount codes</span>
+											</div>
+										</div>
+									</div>
+								</div>
 							{/if}
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
@@ -308,7 +342,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-6">
 								<div class="single_plan d-flex align-items-center justify-content-between">
 									<div class="plan_left d-flex align-items-center">

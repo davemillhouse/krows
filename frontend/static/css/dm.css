@@ -59,3 +59,54 @@
   padding:5px 6px 0px;
 }
 
+.popoverButton{
+  background: #f45b0f;
+  border:0;
+  height:32px;
+  width:32px;
+  font-size: 12px;
+font-weight: 400;
+display: inline-block;
+color: #ffffff;
+position: relative;
+margin-right: 0;
+padding: 7px 10px;
+border-radius: 5px;
+}
+
+
+
+.dropdown-item-container::before {
+content: "";
+width: 13px;
+height: 13px;
+background: #fff;
+position: absolute;
+top: -7px;
+right: 7px;
+transform: rotate(45deg);
+border-top: 1px solid #eaedf1;
+border-left: 1px solid #eaedf1;
+border-bottom: 0;
+border-right:0;
+}
+
+.dropdown-item-container {
+  right: 3px;
+top: 42px;
+  background:#ffffff;
+  border-radius: 4px;
+padding: 10px 0;
+-webkit-animation-name: dropdown-animate;
+animation-name: dropdown-animate;
+-webkit-animation-duration: 0.2s;
+animation-duration: 0.2s;
+-webkit-animation-fill-mode: both;
+animation-fill-mode: both;
+border: 0;
+box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
+}
+
+.relative {
+  position: relative;
+}
