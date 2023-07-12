@@ -8,8 +8,6 @@ export const load = async () => {
         const res = await fetch(BASE_API_URL + 'products')
         const data = await res.json();
 
-
-
         return data;
     }
 

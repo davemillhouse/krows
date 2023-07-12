@@ -1,12 +1,9 @@
 <script>
-	import { enhance } from '$app/forms';
-	import { Circle3 } from 'svelte-loading-spinners';
-
-	let working = false;
+	import VoucherForm from "../voucherForm.svelte";
 
 	export let data;
 	const { products } = data;
-	const { voucher } = data;
+	let { voucher } = data;
 </script>
 
 <div class="container-fluid p-0">
@@ -22,55 +19,8 @@
 				</div>
 				<div class="white_card_body">
 				
-					<form
-						method="POST"
-						action="?/update"
-						use:enhance={() => {
-							working = true;
-
-							return async ({ update }) => {
-								await update({ reset: false });
-								working = false;
-							};
-						}}
-					>
-						<input hidden type="text" name="id" bind:value={voucher.id} />
-
-						<div class="mb-3">
-							<label class="form-label" for="name">Name</label>
-							<input
-								type="text"
-								class="form-control"
-								name="name"
-								bind:value={voucher.name}
-							/>
-						</div>
-						<div class="mb-3">
-							<label class="form-label" for="textColor">Text color</label>
-							<input class="form-control" type="text" name="textColor" bind:value={voucher.textColor} />
-						</div>
-						<div class="mb-3">
-							<label class="form-label" for="backgroundColor">Background color</label>
-							<input class="form-control" type="text" name="backgroundColor" bind:value={voucher.backgroundColor} />
-						</div>
-						<div class="mb-3">
-							<label class="form-label" for="description">Description</label>
-							<textarea
-								class="form-control"
-								bind:value={voucher.description}
-								id="description"
-								name="description"
-							/>
-						</div>
-
-						{#if working}
-							<div style="display:flex;" class="justify-content-center">
-								<Circle3 size="35" />
-							</div>
-						{:else}
-							<button class="btn-primary" type="submit"> Go </button>
-						{/if}
-					</form>
+					<VoucherForm { voucher } method="update"></VoucherForm>
+	
 				</div>
 			</div>
 		</div>

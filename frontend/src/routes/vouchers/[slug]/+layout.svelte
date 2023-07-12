@@ -1,15 +1,20 @@
 <script>
 
+	import VoucherForm from '../voucherForm.svelte';
+
 	export let data;
-	const { voucher } = data;
+	let { voucher } = data;
 
 	let addButtonText = 'Add a voucher';
+    let view = "list"
 
 	function showAddVoucher() {
-		if (view == 'cards') {
-			addButtonText = 'View vouchers';
-		} else {
+		if (view == 'list') {
 			addButtonText = 'Add a voucher';
+			view = 'add';
+		} else {
+			addButtonText = 'View vouchers';
+			view = 'list';
 		}
 	}
 </script>
@@ -33,6 +38,10 @@
 			</div>
 		</div>
 
+
 	<slot></slot>
+
+
+
 	</div>
 </div>

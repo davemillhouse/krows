@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 
 	export let data;
+	const { voucher } = data;
 	const { vouchers } = data;
 	const { dataByDay } = data;
 	const { topSellers } = data;
@@ -29,11 +30,11 @@
 	let addButtonText = 'Add a voucher';
 
 	function showAddVoucher() {
-		if (view == 'cards') {
+		if (view == 'list') {
 			view = 'add';
 			addButtonText = 'View vouchers';
 		} else {
-			view = 'cards';
+			view = 'list';
 			addButtonText = 'Add a voucher';
 		}
 	}
@@ -154,6 +155,7 @@
 	let salesByVoucherChart;
 
 	import { onMount } from 'svelte';
+	import VoucherForm from './voucherForm.svelte';
 	onMount(() => {
 		soldSupplierVoucherTotalsChart = new ApexCharts(
 			document.querySelector('[data-chart="soldSupplierVoucherTotalsChart"]'),
@@ -199,7 +201,14 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-8">
 				<div class="row">
+
+					{#if view=="add"}
+					<VoucherForm method="create" {voucher}></VoucherForm>
+					{:else}
+					
+					
 					{#each vouchers as voucher}
+
 						<div class="col-lg-12">
 							<a href="/vouchers/{voucher.id}">
 								<div class="white_card card_height_100 mb_30 justify-content-between">
@@ -227,7 +236,12 @@
 								</div>
 							</a>
 						</div>{/each}
-				</div>
+				
+					
+					
+					
+					{/if}
+					</div>
 			</div>
 			<div class="col-lg-4">
 				<div class="white_card mb_30 user_crm_wrapper">
