@@ -3,10 +3,24 @@
 	import { enhance } from '$app/forms';
 	import { Circle3 } from 'svelte-loading-spinners';
 
+import {
+  Button,
+  ToastContainer,
+  ToastBody,
+  Toast,
+  ToastHeader
+} from "yesvelte";
+
 	let working = false;
 
 	export let data;
 	const { session } = data;
+
+	let show = false
+
+	function toggle() {
+		show = !show
+	}
 
 	var options = {
 		chart: {
@@ -73,6 +87,15 @@
 		chart.render();
 	});
 </script>
+
+<ToastContainer placement="bottom">
+		<Toast bind:show>
+			<ToastHeader>
+				Updated ok
+			</ToastHeader>
+			<ToastBody>This is another toast message.</ToastBody>
+		</Toast>
+</ToastContainer>
 
 <div class="container-fluid p-0">
 	<div class="row">
@@ -149,8 +172,12 @@
 												<Circle3 size="35" />
 											</div>
 										{:else}
-											<button class="btn-primary" type="submit"> Update </button>
+											<button class="btn-primary" type="submit"> Go </button>
 										{/if}
+
+										<Button color="danger" on:click={toggle}>
+											{show ? 'Hide' : 'Show'}
+										</Button>
 									</div>
 								</div>
 							</div>
@@ -413,3 +440,4 @@
 		</div>
 	</div>
 </div>
+

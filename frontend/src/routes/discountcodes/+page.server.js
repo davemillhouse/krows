@@ -4,21 +4,21 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 export const load = async () => {
 
-    const fetchVoucher = async () => {
-        const res = await fetch(BASE_API_URL + 'suppliervouchers/-1')
+    const fetchDiscountCode = async () => {
+        const res = await fetch(BASE_API_URL + 'discountcodes/-1')
         const data = await res.json()
         return data;
     }
 
-    const fetchVouchers = async () => {
-        const res = await fetch(BASE_API_URL + 'suppliervouchers')
+    const fetchDiscountCodes = async () => {
+        const res = await fetch(BASE_API_URL + 'discountcodes')
         const data = await res.json()
         return data;
     }
 
     const fetchDataByDay = async () => {
         let startDate = addDays(new Date(), -7).toJSON();
-        let url = 'ordersbyday?IncludeSoldSupplierVoucherTotal=true&fromCompletedDateUtc=' + startDate
+        let url = 'ordersbyday?IncludeSoldDiscountCodeTotal=true&fromCompletedDateUtc=' + startDate
 
         const res = await fetch(BASE_API_URL + url)
         const data = await res.json();
@@ -28,7 +28,7 @@ export const load = async () => {
 
     const fetchTopSellers = async () => {
         let startDate = addDays(new Date(), -7).toJSON();
-        let url = 'soldsupplierVouchers/amountSold'
+        let url = 'soldDiscountCodes/amountSold'
 
         const res = await fetch(BASE_API_URL + url)
         const data = await res.json();
@@ -37,8 +37,8 @@ export const load = async () => {
     }
 
     return {
-        voucher: fetchVoucher(),
-        vouchers: fetchVouchers(),
+        discountCode: fetchDiscountCode(),
+        discountCodes: fetchDiscountCodes(),
         dataByDay: fetchDataByDay(),
         topSellers: fetchTopSellers()
     }
@@ -54,11 +54,11 @@ export const actions = {
 
     create: async ({ cookies, request }) => {
 
-        let voucher = await getVoucherFromForm(-1, await request.formData());
+        let discountCode = await getDiscountCodeFromForm(-1, await request.formData());
 
-        const res = await fetch(BASE_API_URL + 'suppliervouchers', {
+        const res = await fetch(BASE_API_URL + 'discountcode', {
             method: 'POST',
-            body: JSON.stringify(voucher),
+            body: JSON.stringify(discountCode),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -71,11 +71,11 @@ export const actions = {
 
         const formData = await request.formData();
         
-        let voucher = await getVoucherFromForm(formData.get('id'), formData);
+        let discountCode = await getDiscountCodeFromForm(formData.get('id'), formData);
 
-        const res = await fetch(BASE_API_URL + 'suppliervouchers', {
+        const res = await fetch(BASE_API_URL + 'discountcode', {
             method: 'PUT',
-            body: JSON.stringify(voucher),
+            body: JSON.stringify(discountCode),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -85,22 +85,22 @@ export const actions = {
     }
 };
 
-async function fetchSupplierVoucher(voucherId) {
-    const res = await fetch(BASE_API_URL + 'suppliervouchers/' + voucherId)
+async function fetchDiscountCode(discountCodeId) {
+    const res = await fetch(BASE_API_URL + 'discountcode/' + discountCodeId)
     const data = await res.json()
 
     console.log("data:" + data)
     return data;
 }
 
-async function getVoucherFromForm(voucherId, formData) {
+async function getDiscountCodeFromForm(discountCodeId, formData) {
     console.log("formData:" + formData)
-    console.log("id: " + voucherId)
-    let voucher = await fetchSupplierVoucher(voucherId);
-    console.log("dbvoucher:" + voucher)
-    voucher.name = formData.get('name');
-    voucher.description = formData.get('description');
-    return voucher;
+    console.log("id: " + discountCodeId)
+    let discountCode = await fetchDiscountCode(discountCodeId);
+    console.log("dbdiscountCode:" + discountCode)
+    discountCode.name = formData.get('name');
+    discountCode.description = formData.get('description');
+    return discountCode;
 }
 
 

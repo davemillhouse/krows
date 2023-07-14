@@ -1,8 +1,10 @@
 <script>
 	import { enhance } from '$app/forms';
+	import DiscountCodeForm from "./discountCodeForm.svelte";
 
 	export let data;
-	const { products } = data;
+	const { discountCode } = data;
+	const { discountCodes } = data;
 	const { dataByDay } = data;
 	const { topSellers } = data;
 
@@ -17,28 +19,28 @@
 		})
 		.sort((a, b) => b.y - a.y);
 
-	const salesByProductData = topSellers
+	const salesBydiscountCodeData = topSellers
 		.map((item) => {
 			return {
 				x: item.name,
 				y: item.soldAmount
 			};
 		})
-		.sort((a, b) => b.y - a.y);
+		.sort((b,a) => b.y - a.y);
 
-	let addButtonText = 'Add a product';
+	let addButtonText = 'Add a discountCode';
 
-	function showAddProduct() {
-		if (view == 'cards') {
+	function showAdddiscountCode() {
+		if (view == 'list') {
 			view = 'add';
-			addButtonText = 'View products';
+			addButtonText = 'View discount codes';
 		} else {
-			view = 'cards';
-			addButtonText = 'Add a product';
+			view = 'list';
+			addButtonText = 'Add a discount code';
 		}
 	}
 
-	let salesByProductChartOptions = {
+	let salesByDiscountCodeChartOptions = {
 		grid: {
 			show: false
 		},
@@ -71,7 +73,7 @@
 		series: [
 			{
 				name: 'Amount',
-				data: salesByProductData
+				data: salesBydiscountCodeData
 			}
 		],
 		xaxis: {
@@ -111,7 +113,7 @@
 		}
 	};
 
-	let soldProductTotalsOptions = {
+	let soldDiscountCodeTotalsOptions = {
 		chart: {
 			type: 'line',
 			height: '100%',
@@ -122,7 +124,7 @@
 		series: [
 			{
 				name: 'Amount',
-				data: dataByDay.soldTicketTotals
+				data: dataByDay.soldDiscountCodeTotals
 			}
 		],
 		xaxis: {
@@ -149,17 +151,17 @@
 		}
 	};
 
-	let soldProductTotalsChart;
+	let soldDiscountCodeTotalsChart;
 	let topSellersChart;
-	let salesByProductChart;
+	let salesByDiscountCodeChart;
 
 	import { onMount } from 'svelte';
 	onMount(() => {
-		soldProductTotalsChart = new ApexCharts(
-			document.querySelector('[data-chart="soldProductTotalsChart"]'),
-			soldProductTotalsOptions
+		soldDiscountCodeTotalsChart = new ApexCharts(
+			document.querySelector('[data-chart="soldDiscountCodeTotalsChart"]'),
+			soldDiscountCodeTotalsOptions
 		);
-		soldProductTotalsChart.render();
+		soldDiscountCodeTotalsChart.render();
 
 		topSellersChart = new ApexCharts(
 			document.querySelector('[data-chart="topSellersChart"]'),
@@ -167,16 +169,16 @@
 		);
 		topSellersChart.render();
 
-		salesByProductChart = new ApexCharts(
-			document.querySelector('[data-chart="salesByProductChart"]'),
-			salesByProductChartOptions
+		salesByDiscountCodeChart = new ApexCharts(
+			document.querySelector('[data-chart="salesByDiscountCodeChart"]'),
+			salesByDiscountCodeChartOptions
 		);
-		salesByProductChart.render();
+		salesByDiscountCodeChart.render();
 	});
 </script>
 
 <svelte:head>
-	<title>Krowz - Products</title>
+	<title>Krowz - Discount Codes</title>
 </svelte:head>
 
 <div class="container-fluid p-0 sm_padding_15px">
@@ -184,43 +186,49 @@
 		<div class="col-12">
 			<div class="page_title_box d-flex align-items-center justify-content-between">
 				<div class="page_title_left">
-					<h3 class="f_s_30 f_w_700 dark_text">Your products</h3>
+					<h3 class="f_s_30 f_w_700 dark_text">Your discountCodes</h3>
 					<ol class="breadcrumb page_bradcam mb-0">
 						<ol class="breadcrumb page_bradcam mb-0">
 							<li class="breadcrumb-item">Reports</li>
-							<li class="breadcrumb-item">Reorder</li>
 							<li class="breadcrumb-item">Help</li>
 						</ol>
 					</ol>
 				</div>
-				<button class="btn_2" on:click={showAddProduct}>{addButtonText}</button>
+				<button class="btn_2" on:click={showAdddiscountCode}>{addButtonText}</button>
 			</div>
 		</div>
 
 		<div class="row justify-content-center">
 			<div class="col-lg-8">
 				<div class="row">
-					{#each products as product}
-						<div class="col-lg-6">
-							<a href="/products/{product.id}">
+
+					{#if view=="add"}
+					<DiscountCodeForm method="create" {discountCode}></DiscountCodeForm>
+					{:else}
+					
+					
+					{#each discountCodes as discountCode}
+
+						<div class="col-lg-12">
+							<a href="/discountcodes/{discountCode.id}">
 								<div class="white_card card_height_100 mb_30 justify-content-between">
 									<div class="white_card_body pt_30">
 										<div class="d-flex justify-content-between">
 											<div class="h-100 mr_10">
 												<div
 													class="activity-bell-t3"
-													style="background-color: {product.backgroundColor}"
+													style="background-color: {discountCode.backgroundColor}"
 												/>
 											</div>
 											<div class="timeLine_inner d-flex align-items-center w-100">
 												<div class="activity_wrap">
-													<h6>{product.name}</h6>
-													<p>{product.description}</p>
+													<h6>{discountCode.name}</h6>
+													<p>{discountCode.description}</p>
 												</div>
 											</div>
 											<div class="timeLine_inner d-flex align-items-center">
 												<div class="activity_wrap">
-													<h6 />
+													<h6>{discountCode.code}</h6>
 												</div>
 											</div>
 										</div>
@@ -228,7 +236,12 @@
 								</div>
 							</a>
 						</div>{/each}
-				</div>
+				
+					
+					
+					
+					{/if}
+					</div>
 			</div>
 			<div class="col-lg-4">
 				<div class="white_card mb_30 user_crm_wrapper">
@@ -237,10 +250,10 @@
 							<div class="thumb">
 								<img src="img/crm/infographic.svg" alt />
 							</div>
-							<span class="home-card-header">sales by product</span>
+							<span class="home-card-header">amount discounted</span>
 						</div>
 						<div class="white_card_body_graph mb_20" style="height:250px;">
-							<div data-chart="salesByProductChart" />
+							<div data-chart="salesByDiscountCodeChart" />
 						</div>
 					</div>
 				</div>
@@ -250,10 +263,12 @@
 							<div class="thumb">
 								<img src="img/crm/infographic.svg" alt />
 							</div>
-							<span class="home-card-header">{dataByDay.soldTicketTotalString} ticket sales</span>
+							<span class="home-card-header"
+								>{dataByDay.soldDiscountCodeTotalString} discount code sales</span
+							>
 						</div>
 						<div class="white_card_body_graph mb_20" style="height:250px;">
-							<div data-chart="soldProductTotalsChart" />
+							<div data-chart="soldDiscountCodeTotalsChart" />
 						</div>
 					</div>
 				</div>
@@ -263,7 +278,7 @@
 							<div class="thumb">
 								<img src="img/crm/infographic.svg" alt />
 							</div>
-							<span class="home-card-header">tickets sold</span>
+							<span class="home-card-header">most used</span>
 						</div>
 						<div class="white_card_body_graph mb_20" style="height:250px;">
 							<div data-chart="topSellersChart" />
@@ -279,7 +294,7 @@
 					<div class="white_card_header">
 						<div class="box_header m-0">
 							<div class="main-title">
-								<h3 class="m-0">Create a product for sale</h3>
+								<h3 class="m-0">Create a discountCode for sale</h3>
 							</div>
 						</div>
 					</div>

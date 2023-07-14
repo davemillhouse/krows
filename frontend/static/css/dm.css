@@ -110,3 +110,33 @@ box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
 .relative {
   position: relative;
 }
+
+.y-accordion-header-button, .y-accordion {
+  color:white !important;
+}
+
+.activity-pil {
+  background: #3ca34c;
+  padding: 10px 20px;
+  border-radius: 15px;
+  transition: .3s;
+  margin-bottom: 15px;
+}
+
+.activity-pil .text_color_11{
+  color:white !important;
+}
+
+.unlinkedactivity-pil .text_color_11{
+  color:rgba(0, 0, 0, 0.642) !important;
+}
+
+.unlinkedactivity-pil {
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  transition: .3s;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.642) !important;
+}
+

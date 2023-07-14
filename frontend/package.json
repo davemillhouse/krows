@@ -20,6 +20,7 @@
 		"@rgossiaux/svelte-headlessui": "^2.0.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "^1.20.2",
+		"date-picker-svelte": "^2.6.0",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",

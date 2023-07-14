@@ -1,6 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
-
+	import VoucherForm from './voucherForm.svelte';
+	
 	export let data;
 	const { voucher } = data;
 	const { vouchers } = data;
@@ -155,7 +156,6 @@
 	let salesByVoucherChart;
 
 	import { onMount } from 'svelte';
-	import VoucherForm from './voucherForm.svelte';
 	onMount(() => {
 		soldSupplierVoucherTotalsChart = new ApexCharts(
 			document.querySelector('[data-chart="soldSupplierVoucherTotalsChart"]'),

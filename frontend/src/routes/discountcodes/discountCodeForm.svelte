@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { Circle3 } from 'svelte-loading-spinners';
 
-	export let voucher;
+	export let discountCode;
     export let method;
 
     let working = false;
@@ -11,7 +11,7 @@
 
 <form
 	method="POST"
-	action="/vouchers?/{method}"
+	action="/discountCodes?/{method}"
 	use:enhance={() => {
 		working = true;
 
@@ -21,15 +21,15 @@
 		};
 	}}
 >
-	<input hidden type="text" name="id" bind:value={voucher.id} />
+	<input hidden type="text" name="id" bind:value={discountCode.id} />
 
 	<div class="mb-3">
 		<label class="form-label" for="name">Name</label>
-		<input type="text" class="form-control" name="name" bind:value={voucher.name} />
+		<input type="text" class="form-control" name="name" bind:value={discountCode.name} />
 	</div>
 	<div class="mb-3">
 		<label class="form-label" for="textColor">Text color</label>
-		<input class="form-control" type="text" name="textColor" bind:value={voucher.textColor} />
+		<input class="form-control" type="text" name="textColor" bind:value={discountCode.textColor} />
 	</div>
 	<div class="mb-3">
 		<label class="form-label" for="backgroundColor">Background color</label>
@@ -37,14 +37,14 @@
 			class="form-control"
 			type="text"
 			name="backgroundColor"
-			bind:value={voucher.backgroundColor}
+			bind:value={discountCode.backgroundColor}
 		/>
 	</div>
 	<div class="mb-3">
 		<label class="form-label" for="description">Description</label>
 		<textarea
 			class="form-control"
-			bind:value={voucher.description}
+			bind:value={discountCode.description}
 			id="description"
 			name="description"
 		/>
